@@ -28,11 +28,11 @@ const EXECUTABLE_NAME: &str = "ffmpeg.exe";
 #[cfg(windows)]
 const CREATE_NO_WINDOW: u32 = 0x08000000;
 
-pub fn get_vibe_temp_folder() -> PathBuf {
+pub fn get_aurascribe_temp_folder() -> PathBuf {
     use chrono::Local;
     let current_datetime = Local::now();
     let formatted_datetime = current_datetime.format("%Y-%m-%d").to_string();
-    let dir = std::env::temp_dir().join(format!("vibe_temp_{}", formatted_datetime));
+    let dir = std::env::temp_dir().join(format!("aurascribe_temp_{}", formatted_datetime));
     if std::fs::create_dir_all(&dir).is_ok() {
         return dir;
     }

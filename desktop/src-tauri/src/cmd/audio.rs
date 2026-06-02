@@ -1,4 +1,4 @@
-use crate::ffmpeg::get_vibe_temp_folder;
+use crate::ffmpeg::get_aurascribe_temp_folder;
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
 use cpal::{Device, FromSample, Sample, SizedSample, Stream, SupportedStreamConfig};
 use eyre::{bail, eyre, Context, ContextCompat, Result};
@@ -92,7 +92,7 @@ pub async fn start_record(
         };
         let spec = wav_spec_from_config(&config);
 
-        let path = get_vibe_temp_folder().join(format!("{}.wav", random_string(10)));
+        let path = get_aurascribe_temp_folder().join(format!("{}.wav", random_string(10)));
         tracing::debug!("WAV file path: {:?}", path);
         wav_paths.push((path.clone(), 0));
 
@@ -132,7 +132,7 @@ pub async fn start_record(
         let dst = if wav_paths.len() == 1 {
             wav_paths[0].0.clone()
         } else if wav_paths[0].1 > 0 && wav_paths[1].1 > 0 {
-            let dst = get_vibe_temp_folder().join(format!("{}.wav", random_string(10)));
+            let dst = get_aurascribe_temp_folder().join(format!("{}.wav", random_string(10)));
             tracing::debug!("Merging WAV files");
             crate::ffmpeg::merge_wav_files(wav_paths[0].0.clone(), wav_paths[1].0.clone(), dst.clone()).map_err(|e| eyre!("{e:?}")).log_error();
             dst
@@ -146,7 +146,7 @@ pub async fn start_record(
         };
 
         tracing::debug!("Emitting record_finish event");
-        let mut normalized = get_vibe_temp_folder().join(format!("{}.wav", get_local_time()));
+        let mut normalized = get_aurascribe_temp_folder().join(format!("{}.wav", get_local_time()));
         crate::ffmpeg::normalize(dst.clone(), normalized.clone(), None).map_err(|e| eyre!("{e:?}")).log_error();
 
         if store_in_documents {

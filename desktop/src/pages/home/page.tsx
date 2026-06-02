@@ -23,6 +23,7 @@ import { Switch } from '~/components/ui/switch'
 import { Tabs, TabsList, TabsTrigger } from '~/components/ui/tabs'
 import AudioVisualizer from './audio-visualizer'
 import ResummarizeDialog from '~/components/resummarize-dialog'
+import TranslateDialog from '~/components/translate-dialog'
 
 export default function Home() {
 	const { t } = useTranslation()
@@ -228,15 +229,22 @@ export default function Home() {
 					)}
 				</div>
 
-				{vm.preference.homeTab === "file" && vm.summarizeSegments && !vm.loading && (
+				{vm.preference.homeTab === "file" && vm.segments && !vm.loading && (
 					<div className="flex items-center justify-center gap-2">
-						<Tabs value={vm.transcriptTab} onValueChange={(v) => vm.setTranscriptTab(v as 'transcript' | 'summary')}>
-							<TabsList className="rounded-xl">
-								<TabsTrigger value="transcript">{t('common.segments-tab')}</TabsTrigger>
-								<TabsTrigger value="summary">{t('common.summary-tab')}</TabsTrigger>
-							</TabsList>
-						</Tabs>
+						{(vm.summarizeSegments || vm.translatedSegments) && (
+							<Tabs
+								value={vm.transcriptTab}
+								onValueChange={(v) => vm.setTranscriptTab(v as 'transcript' | 'summary' | 'translation')}>
+								<TabsList className="rounded-xl">
+									<TabsTrigger value="transcript">{t('common.segments-tab')}</TabsTrigger>
+									{vm.summarizeSegments && <TabsTrigger value="summary">{t('common.summary-tab')}</TabsTrigger>}
+									{vm.translatedSegments && <TabsTrigger value="translation">{t('common.translation-tab')}</TabsTrigger>}
+								</TabsList>
+							</Tabs>
+						)}
 						<ResummarizeDialog onSubmit={vm.resummarize} loading={vm.summarizing} />
+						<TranslateDialog onSubmit={vm.translate} loading={vm.translating} />
+						{vm.translating && <span className="text-xs text-muted-foreground animate-pulse">{t('common.translating')} {vm.translateProgress}</span>}
 					</div>
 				)}
 
@@ -245,12 +253,24 @@ export default function Home() {
 						<TextArea
 							file={vm.files[0]}
 							placeholder={t('common.transcript-will-displayed-shortly')}
-							segments={vm.transcriptTab === 'transcript' ? vm.segments : vm.summarizeSegments}
-							textFormat={vm.transcriptTab === 'transcript' ? vm.preference.textFormatTranscript : vm.preference.textFormatSummary}
-							setTextFormat={
-								vm.transcriptTab === 'transcript' ? vm.preference.setTextFormatTranscript : vm.preference.setTextFormatSummary
+							segments={
+								vm.transcriptTab === 'transcript'
+									? vm.segments
+									: vm.transcriptTab === 'summary'
+										? vm.summarizeSegments
+										: vm.translatedSegments
 							}
-							readonly={vm.loading}
+							textFormat={
+								vm.transcriptTab === 'summary'
+									? vm.preference.textFormatSummary
+									: vm.preference.textFormatTranscript
+							}
+							setTextFormat={
+								vm.transcriptTab === 'summary'
+									? vm.preference.setTextFormatSummary
+									: vm.preference.setTextFormatTranscript
+							}
+							readonly={vm.loading || vm.translating}
 						/>
 					</div>
 				)}

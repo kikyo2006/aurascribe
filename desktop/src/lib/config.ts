@@ -1,11 +1,11 @@
-export const aboutURL = 'https://thewh1teagle.github.io/vibe/'
-export const updateVersionURL = 'https://github.com/thewh1teagle/vibe/releases/latest'
-export const modelsDocURL = 'https://thewh1teagle.github.io/vibe/docs#models'
-export const discordURL = 'https://discord.gg/EcxWSstQN8'
-export const unsupportedCpuReadmeURL = 'https://thewh1teagle.github.io/vibe/docs#install'
-export const supportVibeURL = 'https://thewh1teagle.github.io/vibe/?action=support-vibe'
+export const aboutURL = 'https://github.com/kikyo2006/aurascribe'
+export const updateVersionURL = 'https://github.com/kikyo2006/aurascribe/releases/latest'
+export const modelsDocURL = 'https://github.com/kikyo2006/aurascribe#models'
+export const discordURL = ''
+export const unsupportedCpuReadmeURL = 'https://github.com/kikyo2006/aurascribe#install'
+export const supportVibeURL = 'https://github.com/kikyo2006/aurascribe'
 export const storeFilename = 'app_config.json'
-export const latestReleaseURL = 'https://github.com/thewh1teagle/vibe/releases/latest'
+export const latestReleaseURL = 'https://github.com/kikyo2006/aurascribe/releases/latest'
 export const latestVersionWithoutVulkan = 'https://github.com/thewh1teagle/vibe/releases/download/v2.4.0/vibe_2.4.0_x64-setup.exe'
 
 export const modelUrls = {

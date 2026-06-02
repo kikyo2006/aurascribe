@@ -64,7 +64,7 @@ pub async fn show_log_path(app_handle: tauri::AppHandle) -> Result<()> {
 
 #[tauri::command]
 pub async fn show_temp_path() -> Result<()> {
-    let temp_path = ffmpeg::get_vibe_temp_folder();
+    let temp_path = ffmpeg::get_aurascribe_temp_folder();
     showfile::show_path_in_file_manager(temp_path);
     Ok(())
 }
@@ -91,15 +91,15 @@ pub fn get_logs(app_handle: tauri::AppHandle) -> Result<String> {
 
 #[tauri::command]
 pub fn is_crashed_recently() -> bool {
-    tracing::debug!("checking path {}", ffmpeg::get_vibe_temp_folder().join("crash.txt").display());
-    ffmpeg::get_vibe_temp_folder().join("crash.txt").exists()
+    tracing::debug!("checking path {}", ffmpeg::get_aurascribe_temp_folder().join("crash.txt").display());
+    ffmpeg::get_aurascribe_temp_folder().join("crash.txt").exists()
 }
 
 #[tauri::command]
 pub fn rename_crash_file() -> Result<()> {
     std::fs::rename(
-        ffmpeg::get_vibe_temp_folder().join("crash.txt"),
-        ffmpeg::get_vibe_temp_folder().join("crash.1.txt"),
+        ffmpeg::get_aurascribe_temp_folder().join("crash.txt"),
+        ffmpeg::get_aurascribe_temp_folder().join("crash.1.txt"),
     )
     .context("Can't delete file")
 }

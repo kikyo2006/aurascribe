@@ -22,13 +22,13 @@ export function useSingleInstance({ setFiles }: UseSingleInstanceProps) {
 			const argv = event.payload
 			let action = argv?.[1]
 
-			// vibe://download/?url=google.com
+			// aurascribe://download/?url=google.com
 			// already handled in deep links in macos
-			if (action && action.startsWith('vibe://download/?') && platform != 'macos') {
-				const params = new URLSearchParams(action.replace('vibe://download/?', ''))
+			if (action && action.startsWith('aurascribe://download/?') && platform != 'macos') {
+				const params = new URLSearchParams(action.replace('aurascribe://download/?', ''))
 				const url = params.get('url')
 				if (url) {
-					const downloadURL = url.replace('vibe://download/?url=', '')
+					const downloadURL = url.replace('aurascribe://download/?url=', '')
 					const hostname = new URL(url).hostname
 					const confirm = await ask(`${t('common.ask-for-download-model')} ${hostname}?`, { title: t('common.download-model'), kind: 'info' })
 					if (confirm) {

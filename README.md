@@ -1,14 +1,14 @@
 <p align="center">
-  <a target="blank" href="https://github.com/thewh1teagle/vibe">
+  <a target="blank" href="https://github.com/kikyo2006/aurascribe">
     <img
         width="96px"
-        alt="Vibe logo"
+        alt="AuraScribe logo"
         src="./design/logo.png"
     />
   </a>
 </p>
 
-<h1 align="center">Vibe - Transcribe on your own!</h1>
+<h1 align="center">AuraScribe - Transcribe on your own!</h1>
 
 <p align="center">
   <strong>⌨️ Transcribe audio / video offline using OpenAI Whisper</strong>
@@ -16,22 +16,18 @@
 </p>
 
 <p align="center">
-  <a target="_blank" href="https://thewh1teagle.github.io/vibe/">
-    🔗 Download Vibe
+  <a target="_blank" href="https://github.com/kikyo2006/aurascribe/releases/latest">
+    📥 Download AuraScribe
   </a>
-    &nbsp; | &nbsp; Give it a Star ⭐ | &nbsp;
-    <a target="_blank" href="https://thewh1teagle.github.io/vibe/?action=support-vibe">Support the project 🤝</a>
+  &nbsp; | &nbsp;
+  <a target="_blank" href="https://github.com/kikyo2006/aurascribe">Give it a Star ⭐</a>
+  &nbsp; | &nbsp;
+  <a target="_blank" href="https://github.com/kikyo2006/aurascribe/issues">Report an Issue 🐛</a>
 </p>
+
+> **Forked from [Vibe](https://github.com/thewh1teagle/vibe) by [thewh1teagle](https://github.com/thewh1teagle)** — all core transcription engine credits go to the original project.
 
 <hr />
-
-## Screenshots
-
-<p align="center">
-	<a target="_blank" href="https://thewh1teagle.github.io/vibe/">
-    	<img width=600 src="https://github.com/thewh1teagle/vibe/assets/61390950/22779ac6-9e49-4c21-b528-29647f039da2">
-	</a>
-</p>
 
 # Features 🌟
 
@@ -54,75 +50,53 @@
 - ⚙️ Model arguments for advanced users
 - ⏳ Transcribe system audio
 - 🎤 Transcribe from microphone
-- 🖥️ CLI support: Use Vibe directly from the command line interface! (see `--help`)
+- 🖥️ CLI support: Use AuraScribe directly from the command line interface! (see `--help`)
 - 👥 Speaker diarization
 - 🎬 Stable timestamps mode for subtitle/movie-grade timing (VAD-backed, slower)
-- 📱 ~iOS & Android support~ (coming soon)
-- 📥 Integrate custom models from your own site: Use `vibe://download/?url=<model url>`
+- 📥 Integrate custom models from your own site
 - 📹 Choose caption length optimized for videos / reels
 - ⚡ HTTP API with Swagger docs! (use `--server` and open `http://<host>:3022/docs` for docs)
 
 # Supported platforms 🖥️
 
-`MacOS`
+`macOS`
 `Windows`
 `Linux`
 
-# Contribute 🤝
+# Getting Started 🚀
 
-## Developers
+## Build from source
 
-Get started with local development [here](docs/building.md).
+Get started with local development by following the guide in [docs/building.md](docs/building.md).
 
-PRs are welcomed!
-In addition, you're welcome to add translations.
+## Add translation 🌐
 
-We would like to express our sincere gratitude to all the contributors.
-
-<a href="https://github.com/thewh1teagle/vibe/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=thewh1teagle/vibe" />
-</a>
-
-# Community
-
-[![Discord](https://img.shields.io/badge/chat-discord-7289da.svg)](https://discord.gg/EcxWSstQN8)
-
-# Roadmap 🛣️
-
-You can see the roadmap in [Vibe-Roadmap](https://github.com/users/thewh1teagle/projects/5/views/1)
-
-# Add translation 🌐
-
-1. Copy `en` from `desktop/src-tauri/locales` folder to new directory eg `pt-BR` (use [bcp47 language code](https://gist.github.com/thewh1teagle/c8877e5c4c5e2780754ddd065ae2592e))
-2. Change every value in the files there, to the new language and keep the keys as is
-3. create PR / issue in Github
-
-In addition you can add translation to [Vibe website](https://thewh1teagle.github.io/vibe/) by creating new files in the `landing/static/locales`.
+1. Copy `en` from `desktop/src-tauri/locales` folder to a new directory, e.g. `pt-BR` (use [BCP47 language code](https://gist.github.com/thewh1teagle/c8877e5c4c5e2780754ddd065ae2592e))
+2. Change every value in the files there to the new language and keep the keys as is
+3. Open a PR / issue on [GitHub](https://github.com/kikyo2006/aurascribe)
 
 # Docs 📄
 
-see [Vibe Docs](https://github.com/thewh1teagle/vibe/tree/main/docs)
+See [docs/](https://github.com/kikyo2006/aurascribe/tree/main/docs) for additional documentation.
 
-# I want to know more!
+# Issue Report 🐛
 
-Medium [post](https://medium.com/@thewh1teagle/creating-vibe-multilingual-audio-transcription-872ab6d9dbb0)
-
-# Issue report
-
-You can open [new issue](https://github.com/thewh1teagle/vibe/issues/new?assignees=octocat&labels=bug&projects=&template=bug_report.yaml&title=[Short+title]) and it's recommend to check [debug.md](docs/debug.md) first.
+You can open a [new issue](https://github.com/kikyo2006/aurascribe/issues/new?assignees=kikyo2006&labels=bug&projects=&template=bug_report.yaml&title=[Short+title]) and it's recommended to check [debug.md](docs/debug.md) first.
 
 # Privacy Policy 🔒
 
-Your privacy is important to us. Please review our [Privacy Policy](http://thewh1teagle.github.io/vibe/?action=open-privacy-policy) to understand how we handle your data.
+AuraScribe performs all transcription locally on your device. No audio, video, or transcript data is ever sent to external servers. Your privacy is fully protected.
 
 # Credits
 
-Thanks for [tauri.app](https://tauri.app/) for making the best apps framework I ever seen
+Thanks to [thewh1teagle/vibe](https://github.com/thewh1teagle/vibe) for the original open source project that AuraScribe is based on.
 
-Thanks for [github.com/whisper.cpp](https://github.com/ggerganov/whisper.cpp) for outstanding interface for the AI model.
+Thanks to [tauri.app](https://tauri.app/) for making the best apps framework I ever seen.
 
-Thanks for [openai.com](https://openai.com/) for their amazing [Whisper model](https://openai.com/research/whisper)
+Thanks to [github.com/whisper.cpp](https://github.com/ggerganov/whisper.cpp) for outstanding interface for the AI model.
 
-Thanks for [github.com](https://github.com/) for their support in open source projects, providing infastructure completely free.
+Thanks to [openai.com](https://openai.com/) for their amazing [Whisper model](https://openai.com/research/whisper).
+
+Thanks to [github.com](https://github.com/) for their support in open source projects, providing infrastructure completely free.
 
 And for all the amazing open source frameworks and libraries which this project uses...

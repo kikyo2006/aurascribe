@@ -13,11 +13,13 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 import successSound from '~/assets/success.mp3'
 import { TextFormat } from '~/components/format-select'
+import WhisperLanguages from '~/assets/whisper-languages.json'
 import { AudioDevice } from '~/lib/audio'
 import { ensureSystemAudioPermission } from '~/lib/permissions'
 import { analyticsEvents, trackAnalyticsEvent } from '~/lib/analytics'
 import * as config from '~/lib/config'
-import { Claude, Llm, Ollama, OpenAICompatible } from '~/lib/llm'
+import { Claude, Gemini, Llm, Ollama, OpenAICompatible } from '~/lib/llm'
+import { TranslateConfig } from '~/components/translate-dialog'
 import * as transcript from '~/lib/transcript'
 import { isUserError } from '~/lib/sona-errors'
 import { useConfirmExit } from '~/lib/use-confirm-exit'
@@ -49,13 +51,16 @@ export function viewModel() {
 	const [isAborting, setIsAborting] = useState(false)
 	const [segments, setSegments] = useState<transcript.Segment[] | null>(null)
 	const [summarizeSegments, setSummarizeSegments] = useState<transcript.Segment[] | null>(null)
+	const [translatedSegments, setTranslatedSegments] = useState<transcript.Segment[] | null>(null)
+	const [translating, setTranslating] = useState(false)
+	const [translateProgress, setTranslateProgress] = useState<string>('')
 	const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
 	const [progress, setProgress] = useState<number | null>(0)
 	const { t } = useTranslation()
 	const toast = useToastProvider()
 	const [llm, setLlm] = useState<Llm | null>(null)
-	const [transcriptTab, setTranscriptTab] = useLocalStorage<'transcript' | 'summary'>('prefs_transcript_tab', 'transcript')
-	useConfirmExit((segments?.length ?? 0) > 0 || loading)
+	const [transcriptTab, setTranscriptTab] = useLocalStorage<'transcript' | 'summary' | 'translation'>('prefs_transcript_tab', 'transcript')
+	useConfirmExit((segments?.length ?? 0) > 0 || loading || translating)
 
 	const { files, setFiles } = useFilesContext()
 	const preference = usePreferenceProvider()
@@ -616,6 +621,93 @@ export function viewModel() {
 		}
 	}
 
+	async function translate(srcLang: string, targetLang: string, config: TranslateConfig) {
+		if (!segments) return
+		setTranslating(true)
+		setTranslateProgress('0%')
+
+		const getLanguageName = (code: string) => {
+			if (code === 'auto') return 'auto-detect'
+			const entry = Object.entries(WhisperLanguages).find(([_, c]) => c === code)
+			return entry ? entry[0] : code
+		}
+
+		const srcLangName = getLanguageName(srcLang)
+		const targetLangName = getLanguageName(targetLang)
+
+		try {
+			let translatorLlm: Llm
+			const dummyConfig = {
+				enabled: true,
+				prompt: '',
+				maxTokens: 8192,
+				claudeApiKey: config.claudeApiKey,
+				model: config.platform === 'claude' ? config.claudeModel : config.platform === 'gemini' ? config.geminiModel : config.openaiModel,
+				ollamaBaseUrl: '',
+				openaiBaseUrl: config.openaiBaseUrl,
+				openaiApiKey: config.openaiApiKey,
+				geminiApiKey: config.geminiApiKey,
+				platform: config.platform,
+			}
+
+			if (config.platform === 'claude') {
+				translatorLlm = new Claude(dummyConfig)
+			} else if (config.platform === 'gemini') {
+				translatorLlm = new Gemini(dummyConfig)
+			} else {
+				translatorLlm = new OpenAICompatible(dummyConfig)
+			}
+
+			const batchSize = 40
+			const translated: transcript.Segment[] = []
+
+			for (let i = 0; i < segments.length; i += batchSize) {
+				const chunk = segments.slice(i, i + batchSize)
+				const payload = chunk.map((seg, idx) => ({
+					id: idx,
+					text: seg.text,
+				}))
+
+				const prompt = `You are a professional translator. Translate the following transcript segments from ${srcLangName} to ${targetLangName}. 
+System/Tone/Style instructions: ${config.systemPrompt}. 
+Maintain the exact JSON format, only translating the 'text' property of each segment. 
+Do not add any introductory or concluding text. Do not wrap the response in markdown blocks. 
+Return ONLY valid JSON array of objects.
+
+JSON payload:
+${JSON.stringify(payload)}`
+
+				const progressPercent = Math.round((i / segments.length) * 100)
+				setTranslateProgress(`${progressPercent}%`)
+
+				const responseText = await translatorLlm.ask(prompt)
+				const cleaned = responseText.replace(/```json/g, '').replace(/```/g, '').trim()
+				const parsed = JSON.parse(cleaned) as { id: number; text: string }[]
+
+				if (Array.isArray(parsed) && parsed.length === chunk.length) {
+					chunk.forEach((seg, idx) => {
+						translated.push({
+							...seg,
+							text: parsed[idx].text,
+						})
+					})
+				} else {
+					throw new Error('Invalid translation format from the model.')
+				}
+			}
+
+			setTranslatedSegments(translated)
+			setTranscriptTab('translation')
+			hotToast.success(t('common.success-action'))
+		} catch (e) {
+			console.error(e)
+			hotToast.error(`${t('common.error')}: ${String(e)}`)
+		} finally {
+			setTranslating(false)
+			setTranslateProgress('')
+		}
+	}
+
 	async function downloadAudio() {
 		if (audioUrl) {
 			setYtDlpProgress(0)
@@ -648,6 +740,11 @@ export function viewModel() {
 		setTranscriptTab,
 		summarizeSegments,
 		setSummarizeSegments,
+		translatedSegments,
+		setTranslatedSegments,
+		translating,
+		translate,
+		translateProgress,
 		devices,
 		setDevices,
 		inputDevice,

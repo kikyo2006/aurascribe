@@ -320,12 +320,14 @@ export default function SettingsPage({ setVisible }: SettingsPageProps) {
 									className="h-12 w-full justify-between rounded-none px-4 font-medium first:rounded-t-lg last:rounded-b-lg hover:bg-accent/55">
 									{t('common.support-the-project')} <HeartIcon className="h-4 w-4 fill-red-500 text-red-500 dark:fill-red-400 dark:text-red-400" />
 								</Button>
+								{config.discordURL && (
 								<Button
 									variant="ghost"
 									onMouseDown={() => openUrl(config.discordURL)}
 									className="h-12 w-full justify-between rounded-none px-4 font-medium first:rounded-t-lg last:rounded-b-lg hover:bg-accent/55">
 									{t('common.discord-community')} <DiscordIcon className="h-4 w-4 text-muted-foreground" />
 								</Button>
+								)}
 							</div>
 						</SectionCard>
 					</div>
