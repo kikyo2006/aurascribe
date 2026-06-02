@@ -62,7 +62,6 @@ jobs:
             - name: Install Rust stable
               uses: dtolnay/rust-toolchain@stable
               with:
-                  # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
                   targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
             - name: Install frontend dependencies
@@ -75,18 +74,14 @@ jobs:
             - name: Build
               uses: tauri-apps/tauri-action@v0
               env:
-                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-                  # Tauri Updater
-                  TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
-                  TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
-                  # Analytics (Aptabase)
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+                  TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
                   APTABASE_APP_KEY: ${{ secrets.APTABASE_APP_KEY }}
                   APTABASE_BASE_URL: ${{ secrets.APTABASE_BASE_URL }}
-                  # Windows signing (remote YubiKey sign server)
                   SIGN_ENABLED: ${{ matrix.platform == 'windows-latest' && inputs.sign-windows && 'true' || 'false' }}
                   SIGN_TUNNEL_URL: ${{ secrets.SIGN_TUNNEL_URL }}
                   SIGN_TUNNEL_SECRET: ${{ secrets.SIGN_TUNNEL_SECRET }}
-                  # macOS signing and notarization (Apple Developer ID)
                   APPLE_CERTIFICATE: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_CERTIFICATE || '' }}
                   APPLE_CERTIFICATE_PASSWORD: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_CERTIFICATE_PASSWORD || '' }}
                   APPLE_SIGNING_IDENTITY: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_SIGNING_IDENTITY || '' }}
@@ -94,10 +89,11 @@ jobs:
                   APPLE_PASSWORD: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_PASSWORD || '' }}
                   APPLE_TEAM_ID: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_TEAM_ID || '' }}
               with:
-                  tagName: v__VERSION__ # the action automatically replaces __VERSION__ with the app version.
-                  releaseName: "v__VERSION__"
+                  tagName: v__VERSION__
+                  releaseName: "AuraScribe v__VERSION__"
                   releaseBody: "What's new? 🎉📣"
-                  prerelease: true
+                  releaseDraft: true
+                  prerelease: false
                   args: ${{ matrix.args }}
                   projectPath: "./desktop"
                   tauriScript: pnpm exec tauri
@@ -109,4 +105,4 @@ jobs:
         - name: Trigger test-release
           run: gh workflow run test-release.yml
           env:
-            GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
