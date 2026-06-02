@@ -71,7 +71,52 @@ jobs:
             - name: Run pre_build.py on ${{ matrix.platform }}
               run: uv run scripts/pre_build.py --target ${{ matrix.target_triple }}
 
-            - name: Build
+            - name: Build macOS (Signed)
+              if: matrix.platform == 'macos-latest' && inputs.sign-macos
+              uses: tauri-apps/tauri-action@v0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+                  TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+                  APTABASE_APP_KEY: ${{ secrets.APTABASE_APP_KEY }}
+                  APTABASE_BASE_URL: ${{ secrets.APTABASE_BASE_URL }}
+                  APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+                  APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+                  APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+                  APPLE_ID: ${{ secrets.APPLE_ID }}
+                  APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+                  APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+              with:
+                  tagName: v__VERSION__
+                  releaseName: "AuraScribe v__VERSION__"
+                  releaseBody: "What's new? 🎉📣"
+                  releaseDraft: true
+                  prerelease: false
+                  args: ${{ matrix.args }}
+                  projectPath: "./desktop"
+                  tauriScript: pnpm exec tauri
+
+            - name: Build macOS (Unsigned)
+              if: matrix.platform == 'macos-latest' && !inputs.sign-macos
+              uses: tauri-apps/tauri-action@v0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+                  TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+                  APTABASE_APP_KEY: ${{ secrets.APTABASE_APP_KEY }}
+                  APTABASE_BASE_URL: ${{ secrets.APTABASE_BASE_URL }}
+              with:
+                  tagName: v__VERSION__
+                  releaseName: "AuraScribe v__VERSION__"
+                  releaseBody: "What's new? 🎉📣"
+                  releaseDraft: true
+                  prerelease: false
+                  args: ${{ matrix.args }}
+                  projectPath: "./desktop"
+                  tauriScript: pnpm exec tauri
+
+            - name: Build Windows/Linux
+              if: matrix.platform != 'macos-latest'
               uses: tauri-apps/tauri-action@v0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -82,12 +127,6 @@ jobs:
                   SIGN_ENABLED: ${{ matrix.platform == 'windows-latest' && inputs.sign-windows && 'true' || 'false' }}
                   SIGN_TUNNEL_URL: ${{ secrets.SIGN_TUNNEL_URL }}
                   SIGN_TUNNEL_SECRET: ${{ secrets.SIGN_TUNNEL_SECRET }}
-                  APPLE_CERTIFICATE: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_CERTIFICATE || '' }}
-                  APPLE_CERTIFICATE_PASSWORD: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_CERTIFICATE_PASSWORD || '' }}
-                  APPLE_SIGNING_IDENTITY: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_SIGNING_IDENTITY || '' }}
-                  APPLE_ID: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_ID || '' }}
-                  APPLE_PASSWORD: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_PASSWORD || '' }}
-                  APPLE_TEAM_ID: ${{ matrix.platform == 'macos-latest' && inputs.sign-macos && secrets.APPLE_TEAM_ID || '' }}
               with:
                   tagName: v__VERSION__
                   releaseName: "AuraScribe v__VERSION__"
