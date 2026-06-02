@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Route, Routes } from 'react-router-dom'
 import UpdateProgress from '~/components/updater-progress'
@@ -18,11 +19,35 @@ import { ToastProvider } from './providers/toast'
 import { Toaster } from '~/components/ui/sonner'
 import { TooltipProvider } from '~/components/ui/tooltip'
 import { DirectionProvider } from '~/components/ui/direction'
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow'
+import { confirmExitMessage } from '~/lib/use-confirm-exit'
 
 export default function App() {
 	const { i18n } = useTranslation()
 	const dir = i18n.dir()
 	document.body.dir = dir
+
+	// Single global close listener — handles ALL routes.
+	// Pages that need a confirmation (e.g. HomePage during transcription)
+	// set the `confirmExitMessage` flag via useConfirmExit().
+	useEffect(() => {
+		let unlisten: (() => void) | null = null
+		getCurrentWebviewWindow()
+			.listen('tauri://close-requested', async () => {
+				const msg = confirmExitMessage
+				if (msg) {
+					if (window.confirm(msg)) {
+						getCurrentWebviewWindow().destroy()
+					}
+				} else {
+					getCurrentWebviewWindow().destroy()
+				}
+			})
+			.then((fn) => {
+				unlisten = fn
+			})
+		return () => unlisten?.()
+	}, [])
 
 	return (
 		<DirectionProvider dir={dir}>

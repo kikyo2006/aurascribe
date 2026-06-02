@@ -60,7 +60,7 @@ export function viewModel() {
 	const toast = useToastProvider()
 	const [llm, setLlm] = useState<Llm | null>(null)
 	const [transcriptTab, setTranscriptTab] = useLocalStorage<'transcript' | 'summary' | 'translation'>('prefs_transcript_tab', 'transcript')
-	useConfirmExit((segments?.length ?? 0) > 0 || loading || translating)
+	useConfirmExit((segments?.length ?? 0) > 0 || loading || translating, t('common.confirm-exit'))
 
 	const { files, setFiles } = useFilesContext()
 	const preference = usePreferenceProvider()

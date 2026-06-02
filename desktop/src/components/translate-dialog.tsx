@@ -43,7 +43,7 @@ export default function TranslateDialog({ onSubmit, loading }: TranslateDialogPr
 	const [openaiApiKey, setOpenaiApiKey] = useLocalStorage<string>('prefs_translate_openai_api_key', '')
 	const [openaiBaseUrl, setOpenaiBaseUrl] = useLocalStorage<string>('prefs_translate_openai_base_url', '')
 	const [openaiModel, setOpenaiModel] = useLocalStorage<string>('prefs_translate_openai_model', 'gpt-4o-mini')
-	const [systemPrompt, setSystemPrompt] = useLocalStorage<string>('prefs_translate_system_prompt', 'Dịch sát nghĩa, văn phong tự nhiên, trôi chảy, phù hợp với ngữ cảnh hội thoại.')
+	const [systemPrompt, setSystemPrompt] = useLocalStorage<string>('prefs_translate_system_prompt', 'Translate accurately, maintaining a natural, fluent, and conversational tone.')
 	const [srcLang, setSrcLang] = useLocalStorage<string>('prefs_translate_src_lang', 'auto')
 	const [targetLang, setTargetLang] = useLocalStorage<string>('prefs_translate_target_lang', 'vi')
 
@@ -101,7 +101,6 @@ export default function TranslateDialog({ onSubmit, loading }: TranslateDialogPr
 									<SelectValue placeholder={t('common.source-language')} />
 								</SelectTrigger>
 								<SelectContent>
-									<SelectItem value="auto">{t('common.auto-detect')}</SelectItem>
 									{langEntries.map(({ label, code }) => (
 										<SelectItem key={code} value={code}>
 											{label}
