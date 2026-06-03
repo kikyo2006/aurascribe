@@ -53,7 +53,8 @@ def main():
     # Map installer assets to tauri platform keys using their signatures
     for asset in assets:
         name = asset["name"]
-        download_url = asset["url"]
+        # Use target release URL (e.g. releases/download/v3.0.20/...) so updater works instantly after publishing draft
+        download_url = f"https://github.com/{repo}/releases/download/{tag}/{name}"
         
         if name.endswith(".sig"):
             continue
@@ -98,7 +99,7 @@ def main():
     # Build final updater json structure
     updater_data = {
         "version": version,
-        "notes": "What's new? 🎉📣",
+        "notes": f"## What's New in v{version} 🚀",
         "pub_date": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "platforms": platforms
     }
