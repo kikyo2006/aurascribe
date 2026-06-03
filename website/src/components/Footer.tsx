@@ -39,14 +39,6 @@ export default function Footer({ onOpenKofi, onOpenPrivacyPolicy }: FooterProps)
 						rel="noreferrer">
 						<Github width="24" height="24" />
 					</a>
-					<div className="h-6 w-px bg-border" />
-					<a
-						className="inline-flex size-6 items-center justify-center"
-						href="https://discord.gg/EcxWSstQN8"
-						target="_blank"
-						rel="noreferrer">
-						<Discord />
-					</a>
 				</div>
 			</nav>
 			<aside className="mt-4 text-center text-sm text-muted-foreground">
