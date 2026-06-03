@@ -36,7 +36,7 @@ export default function Docs() {
 
 	return (
 		<div className="m-auto max-w-[81%] lg:max-w-[680px]" dir="ltr">
-			<h1 className="mb-6 text-4xl font-bold">Vibe Documentation</h1>
+			<h1 className="mb-6 text-4xl font-bold">AuraScribe Documentation</h1>
 
 			<div className="mb-8 flex flex-wrap justify-center gap-2 rounded-xl border border-border bg-card/60 p-2">
 				{docs.map((doc) => (

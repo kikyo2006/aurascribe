@@ -34,7 +34,7 @@ export default function Footer({ onOpenKofi, onOpenPrivacyPolicy }: FooterProps)
 				<div className="flex items-center justify-center gap-4">
 					<a
 						className="inline-flex size-6 items-center justify-center"
-						href="https://github.com/thewh1teagle/vibe"
+						href="https://github.com/kikyo2006/aurascribe"
 						target="_blank"
 						rel="noreferrer">
 						<Github width="24" height="24" />
@@ -50,7 +50,7 @@ export default function Footer({ onOpenKofi, onOpenPrivacyPolicy }: FooterProps)
 				</div>
 			</nav>
 			<aside className="mt-4 text-center text-sm text-muted-foreground">
-				<p>Vibe - {t('title')}</p>
+				<p>AuraScribe - {t('title')}</p>
 			</aside>
 		</footer>
 	)

@@ -3,35 +3,35 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://thewh1teagle.github.io/vibe/#organization",
-      "name": "Vibe",
-      "url": "https://thewh1teagle.github.io/vibe/",
-      "logo": "https://thewh1teagle.github.io/vibe/logo.png",
+      "@id": "https://kikyo2006.github.io/aurascribe/#organization",
+      "name": "AuraScribe",
+      "url": "https://kikyo2006.github.io/aurascribe/",
+      "logo": "https://kikyo2006.github.io/aurascribe/logo.png",
       "sameAs": [
-        "https://github.com/thewh1teagle/vibe",
+        "https://github.com/kikyo2006/vibe",
         "https://discord.gg/EcxWSstQN8"
       ]
     },
     {
       "@type": "WebSite",
-      "@id": "https://thewh1teagle.github.io/vibe/#website",
-      "url": "https://thewh1teagle.github.io/vibe/",
-      "name": "Vibe",
+      "@id": "https://kikyo2006.github.io/aurascribe/#website",
+      "url": "https://kikyo2006.github.io/aurascribe/",
+      "name": "AuraScribe",
       "publisher": {
-        "@id": "https://thewh1teagle.github.io/vibe/#organization"
+        "@id": "https://kikyo2006.github.io/aurascribe/#organization"
       }
     },
     {
       "@type": "SoftwareApplication",
-      "@id": "https://thewh1teagle.github.io/vibe/#app",
-      "name": "Vibe",
+      "@id": "https://kikyo2006.github.io/aurascribe/#app",
+      "name": "AuraScribe",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "Windows, macOS, Linux",
       "description": "Local-first transcription app for audio and video with AI summaries and multilingual support.",
-      "url": "https://thewh1teagle.github.io/vibe/",
-      "image": "https://thewh1teagle.github.io/vibe/preview.png",
+      "url": "https://kikyo2006.github.io/aurascribe/",
+      "image": "https://kikyo2006.github.io/aurascribe/preview.png",
       "publisher": {
-        "@id": "https://thewh1teagle.github.io/vibe/#organization"
+        "@id": "https://kikyo2006.github.io/aurascribe/#organization"
       }
     }
   ]

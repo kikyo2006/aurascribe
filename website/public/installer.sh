@@ -1,14 +1,14 @@
 #!/bin/sh
 
-# Linux installer for Vibe
-# Supports Linux x86-64 with RPM / DEB / PKG / Arch (vibe-bin)
+# Linux installer for AuraScribe
+# Supports Linux x86-64 with RPM / DEB / PKG / Arch (aurascribe-bin)
 # Accepts tag in the first argument
 
 # Usage:
 # ./installer.sh {tag}
 
-# Available at https://thewh1teagle.github.io/vibe/installer.sh
-# Via curl -sSf https://thewh1teagle.github.io/vibe/installer.sh | sh -s {tag}
+# Available at https://kikyo2006.github.io/aurascribe/installer.sh
+# Via curl -sSf https://kikyo2006.github.io/aurascribe/installer.sh | sh -s {tag}
 
 set -e
 
@@ -39,10 +39,10 @@ case "$ARCH" in
 esac
 
 # Determine the package type and download the appropriate file
-echo "Downloading Vibe version $TAG for $ARCH..."
+echo "Downloading AuraScribe version $TAG for $ARCH..."
 
-RPM_URL="https://github.com/thewh1teagle/vibe/releases/download/${TAG}/vibe-${TAG_WITHOUT_V}-1.${RPM_ARCH}.rpm"
-DEB_URL="https://github.com/thewh1teagle/vibe/releases/download/${TAG}/vibe_${TAG_WITHOUT_V}_${DEB_ARCH}.deb"
+RPM_URL="https://github.com/kikyo2006/aurascribe/releases/download/${TAG}/aurascribe-${TAG_WITHOUT_V}-1.${RPM_ARCH}.rpm"
+DEB_URL="https://github.com/kikyo2006/aurascribe/releases/download/${TAG}/aurascribe_${TAG_WITHOUT_V}_${DEB_ARCH}.deb"
 echo $RPM_URL
 # Create temporary directory for downloading
 TEMP_DIR=$(mktemp -d)
@@ -53,15 +53,15 @@ if [ -f /etc/os-release ]; then
     # Check for the package manager
     if grep -iq "ubuntu\|debian" /etc/os-release; then
         echo "Detected Debian/Ubuntu. Downloading DEB package..."
-        wget "$DEB_URL" -O vibe.deb
-        sudo apt-get install -y ./vibe.deb
+        wget "$DEB_URL" -O aurascribe.deb
+        sudo apt-get install -y ./aurascribe.deb
     elif grep -iq "centos\|fedora\|rhel" /etc/os-release; then
         echo "Detected CentOS/Fedora/RHEL. Downloading RPM package..."
-        wget -q "$RPM_URL" -O vibe.rpm
-        sudo rpm -ivh vibe.rpm
+        wget -q "$RPM_URL" -O aurascribe.rpm
+        sudo rpm -ivh aurascribe.rpm
     elif grep -iq "arch" /etc/os-release; then
-        echo "Detected Arch Linux. Installing vibe-bin using pacman..."
-        sudo pacman -S vibe-bin
+        echo "Detected Arch Linux. Installing aurascribe-bin using pacman..."
+        sudo pacman -S aurascribe-bin
     else
         echo "Unsupported Linux distribution."
         exit 1
@@ -75,6 +75,6 @@ fi
 cd ..
 rm -rf $TEMP_DIR
 
-echo "Vibe installation complete!"
-echo "Run 'vibe' to open it!"
+echo "AuraScribe installation complete!"
+echo "Run 'aurascribe' to open it!"
 

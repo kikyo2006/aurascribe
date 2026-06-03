@@ -1,15 +1,15 @@
-# Vibe
+# AuraScribe
 
-Official website: https://thewh1teagle.github.io/vibe/
-Project repository: https://github.com/thewh1teagle/vibe
+Official website: https://kikyo2006.github.io/aurascribe/
+Project repository: https://github.com/kikyo2006/aurascribe
 
-Vibe is a local-first transcription app for audio and video.
+AuraScribe is a local-first transcription app for audio and video.
 
 Key pages:
-- Home: https://thewh1teagle.github.io/vibe/
-- Features: https://thewh1teagle.github.io/vibe/features
-- Documentation: https://thewh1teagle.github.io/vibe/docs
-- Privacy Policy: https://thewh1teagle.github.io/vibe/privacy_policy.pdf
+- Home: https://kikyo2006.github.io/aurascribe/
+- Features: https://kikyo2006.github.io/aurascribe/features
+- Documentation: https://kikyo2006.github.io/aurascribe/docs
+- Privacy Policy: https://kikyo2006.github.io/aurascribe/privacy_policy.pdf
 
 Key capabilities:
 - Audio and video transcription

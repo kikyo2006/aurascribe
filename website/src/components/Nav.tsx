@@ -13,12 +13,12 @@ export default function Nav() {
 				<Button variant="ghost" asChild className="text-sm lg:text-xl">
 					<Link to="/" aria-label={t('home')}>
 						<Logo className="size-7 lg:size-8" />
-						<span className="opacity-95">Vibe</span>
+						<span className="opacity-95">AuraScribe</span>
 					</Link>
 				</Button>
 			</div>
 			<ul className="flex-none px-1" dir="ltr">
-				<a href="https://github.com/thewh1teagle/vibe" target="_blank" rel="noreferrer">
+				<a href="https://github.com/kikyo2006/aurascribe" target="_blank" rel="noreferrer">
 					<Github width="28" height="28" />
 				</a>
 			</ul>

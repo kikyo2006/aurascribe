@@ -2,19 +2,19 @@
 
 _Last updated: 2026-02-08_
 
-Thank you for choosing **Vibe**! We are committed to ensuring your privacy and data security. This policy outlines how **Vibe** handles data and user privacy.
+Thank you for choosing **AuraScribe**! We are committed to ensuring your privacy and data security. This policy outlines how **AuraScribe** handles data and user privacy.
 
 ---
 
 ### 1. Offline Operation
 
-**Vibe** operates fully offline. After the initial setup, where the model files are downloaded, all transcription happens entirely on your local device. No data is ever sent outside the app. **Vibe** can also function completely offline, even if you disconnect your internet connection.
+**AuraScribe** operates fully offline. After the initial setup, where the model files are downloaded, all transcription happens entirely on your local device. No data is ever sent outside the app. **AuraScribe** can also function completely offline, even if you disconnect your internet connection.
 
 ---
 
 ### 2. Data Collection
 
-**Vibe** collects anonymous, privacy-friendly analytics through [Aptabase](https://aptabase.com/) to help us identify and fix errors. This includes:
+**AuraScribe** collects anonymous, privacy-friendly analytics through [Aptabase](https://aptabase.com/) to help us identify and fix errors. This includes:
 
 - Event names (e.g. transcription started, failed)
 - Error messages (no file names or content)
@@ -30,13 +30,13 @@ When using the **Summarize** option in the `More Options` menu (which is off by 
 
 ### 3. Automatic Updates
 
-**Vibe** supports automatic updates, which come directly from GitHub releases. No other cloud storage or external servers are involved.
+**AuraScribe** supports automatic updates, which come directly from GitHub releases. No other cloud storage or external servers are involved.
 
 ---
 
 ### 4. Third-Party Services
 
-**Vibe** integrates prebuilt ffmpeg from [wang-bin/avbuild](https://github.com/wang-bin/avbuild) and uses Tauri for building the app. None of these services collect or transmit user data.
+**AuraScribe** integrates prebuilt ffmpeg from [wang-bin/avbuild](https://github.com/wang-bin/avbuild) and uses Tauri for building the app. None of these services collect or transmit user data.
 
 ---
 
@@ -48,9 +48,9 @@ There is no encryption involved in the app. Users have complete control over whe
 
 ### 6. External Links
 
-**Vibe** may include links to external websites, such as:
+**AuraScribe** may include links to external websites, such as:
 
-- [GitHub](https://github.com/thewh1teagle/vibe)
+- [GitHub](https://github.com/kikyo2006/vibe)
 - [Ko-Fi](https://ko-fi.com/thewh1teagle)
 
 These websites may collect personal data according to their respective privacy policies. Please review those policies before interacting with external sites.
@@ -59,7 +59,7 @@ These websites may collect personal data according to their respective privacy p
 
 ### 7. Open Source
 
-**Vibe** is an open-source application, and the source code is available at [github.com/thewh1teagle/vibe](https://github.com/thewh1teagle/vibe).
+**AuraScribe** is an open-source application, and the source code is available at [github.com/kikyo2006/vibe](https://github.com/kikyo2006/vibe).
 
 ---
 
@@ -71,4 +71,4 @@ We may update this Privacy Policy as needed. Any changes will be communicated th
 
 ### 9. Contact Us
 
-If you have any questions or concerns about this Privacy Policy, please reach out via [GitHub Issues](https://github.com/thewh1teagle/vibe/issues).
+If you have any questions or concerns about this Privacy Policy, please reach out via [GitHub Issues](https://github.com/kikyo2006/vibe/issues).

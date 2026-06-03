@@ -1,7 +1,7 @@
 [
 	{
 		"title": "Transcribe almost every language",
-		"description": "Vibe supports up to 100 languages!",
+		"description": "AuraScribe supports up to 100 languages!",
 		"imageURL": "/feature-languages.png"
 	},
 	{
@@ -47,7 +47,7 @@
 	},
 	{
 		"title": "Optimized for GPU",
-		"description": "Vibe is optimized to run on Nvidia/AMD/Apple GPUs!",
+		"description": "AuraScribe is optimized to run on Nvidia/AMD/Apple GPUs!",
 		"imageURL": "/feature-gpu.png",
 		"align": "center"
 	},
