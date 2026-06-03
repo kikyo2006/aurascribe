@@ -1,7 +1,7 @@
 {
 	"$schema": "./gen/schemas/desktop-schema.json",
 	"productName": "AuraScribe",
-	"version": "3.0.19",
+	"version": "3.0.20",
 	"identifier": "com.kikyo2006.aurascribe",
 	"app": {
 		"windows": [],

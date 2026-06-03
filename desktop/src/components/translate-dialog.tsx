@@ -91,7 +91,7 @@ export default function TranslateDialog({ onSubmit, loading }: TranslateDialogPr
 					</DialogTitle>
 				</DialogHeader>
 
-				<div className="flex-1 overflow-y-auto space-y-4 py-4 pr-1 min-h-0">
+				<div className="flex-1 overflow-y-auto space-y-4 py-4 -mx-2 px-2 min-h-0">
 					{/* Language Selectors */}
 					<div className="grid grid-cols-2 gap-4">
 						<div className="space-y-1.5">
