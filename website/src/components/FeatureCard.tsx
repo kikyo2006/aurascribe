@@ -22,13 +22,13 @@ export default function FeatureCard({ title, description, videoURL, imageURL, al
 
 			{imageURL && (
 				<div className={cn('flex', alignMap[align] || 'justify-start')}>
-					<img src={`/vibe${imageURL}`} alt="Image" className="rounded-lg transition-transform duration-500 ease-in-out hover:z-10 hover:scale-105" />
+					<img src={`${import.meta.env.BASE_URL}${imageURL.replace(/^\//, '')}`} alt="Image" className="rounded-lg transition-transform duration-500 ease-in-out hover:z-10 hover:scale-105" />
 				</div>
 			)}
 
 			{videoURL && (
 				<div className={cn('flex items-center', alignMap[align] || 'justify-start')}>
-					<video src={`/vibe${videoURL}`} controls className="rounded-lg" />
+					<video src={`${import.meta.env.BASE_URL}${videoURL.replace(/^\//, '')}`} controls className="rounded-lg" />
 				</div>
 			)}
 		</div>

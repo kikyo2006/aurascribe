@@ -22,7 +22,7 @@ export default function Home() {
 				<img
 					className="h-auto w-full rounded-2xl object-cover transition-transform duration-500 ease-in-out hover:-translate-y-1 hover:scale-[1.03]"
 					alt="preview"
-					src="/vibe/preview.png"
+					src={`${import.meta.env.BASE_URL}preview.png`}
 				/>
 			</div>
 			<WallOfLove />

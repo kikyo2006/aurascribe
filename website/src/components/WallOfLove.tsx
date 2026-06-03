@@ -82,7 +82,7 @@ export default function WallOfLove() {
 	const [supporters, setSupporters] = useState<Supporter[]>([])
 
 	useEffect(() => {
-		fetch('/vibe/kofi-supporters.json')
+		fetch(`${import.meta.env.BASE_URL}kofi-supporters.json`)
 			.then((res) => res.json())
 			.then((data: Supporter[]) => {
 				const withMessages = data.filter((s) => s.message)

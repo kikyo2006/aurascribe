@@ -6,7 +6,7 @@ import Docs from '~/pages/Docs'
 
 export default function App() {
 	return (
-		<BrowserRouter basename="/vibe">
+		<BrowserRouter basename="/aurascribe">
 			<Routes>
 				<Route element={<Layout />}>
 					<Route index element={<Home />} />
